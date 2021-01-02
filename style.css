@@ -1,0 +1,18 @@
+.starter {
+  color:black;
+}
+
+.welcome {
+  margin: 20px;
+  padding: 26px;
+  border: 2px solid darkgoldenrod;
+  display: flex;
+  flex-direction: column;
+}
+
+.startingButton{
+  color: red;
+}
+.startingDiv{
+  color: green;
+}
