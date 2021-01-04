@@ -16,3 +16,13 @@
 .startingDiv{
   color: green;
 }
+.submitAnswer {
+color:orange;
+}
+.answerDiv {
+  color:purple;
+}
+
+.radioButton{
+  color:aquamarine;
+}
