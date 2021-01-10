@@ -37,7 +37,6 @@ function question (){
   
   </form>
 <h3 class = "scoreClass">Score ${STORE.score} of ${STORE.questionNum} possible</h3>
-  <h4 class = "questionCountClass">Question ${STORE.questionNumDisplay}/5</h4>
   <button type = "submit" class = "submitAnswer">Submit Answer</button>
   </section>`;
   
