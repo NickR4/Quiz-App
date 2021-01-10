@@ -13,7 +13,7 @@ const STORE = {
 console.log("Current questionNum value is "+STORE.questionNum);
 
 var questionCount = STORE.questionNum + 1
-var iQuestion = 0;
+
 
 function startScreen(){
    
