@@ -1,5 +1,3 @@
-
-
 const STORE = { 
   pages: [
   {question:"What is Portland's nickname?", choices:['Rose City','Red City','Rainy City','Riot City'], answer:'Rose City'},
@@ -40,7 +38,6 @@ function question (){
   </form>
 <h3 class = "scoreClass">Score ${STORE.score} of ${STORE.questionNum} possible</h3>
   <h4 class = "questionCountClass">Question ${questionCount}/5</h4>
-
   <button type = "submit" class = "submitAnswer">Submit Answer</button>
   </section>`;
   
@@ -56,15 +53,14 @@ function handleBeginQuizSubmit(){
     $(handleQuestionSubmit)
     $(this).remove();
   });
+  
 }
 
 function handleQuestionSubmit(){
-  console.log("handleQuestionSubmit running");
   $('.answerSection').on('click', '.submitAnswer', 
    
   function(event) {
-  console.log("submit answer clicked");
-  console.log('Array Question Number is ' + STORE.questionNum);
+ 
     if (!$("input[name='radbut']:checked").val()) {
     return alert("You miss 100% of the shots you don't take, try to answer the question");
   }
@@ -77,9 +73,11 @@ function handleQuestionSubmit(){
   })};
 
 function increaseNumber(){
+  
   if (STORE.questionNum < 4){
     questionCount++;
   STORE.questionNum++;
+  }
   else{
     $(finalScoreRender)
   }
@@ -91,11 +89,12 @@ function finalScore(){
   <h1> You finished </h1>
   <h3> Your score is ${STORE.score} out of 5 possible points</h3>
    <button type="submit" id = "restartButton" class = "restartingButton" >Restart Quiz!</button>
-   </section>` 
-}
+   </section>
+  `}
 
 function handleRestart(){
   $('.restartingSection').on('click', '.restartingButton', function(event) {
+   
     $(handleQuestionSubmit)
     $(this).remove();
     STORE.questionNum = 0;
