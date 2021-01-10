@@ -5,10 +5,10 @@ const STORE = {
   {question: "How many bridges are there in Portland that go across the Willamette River?", choices:['6','9','12','15'], answer:'12'},
   {question: "Portland is home of the World's Smallest _______", choices:['Horse','House','Mall','Park'], answer:'Park'},
   {question: "Tourist Love to stop and grab a donut at this famous donut shop", choices:['Voodoo Donuts','Dunkin Donuts','Goldstar Donuts','Oregon Donuts'], answer:'Voodoo Donuts'}],
-  questionNum:0, 
+  questionNum:0,
+  questionNumDisplay:1, 
   score: 0}
 
-var questionCount = STORE.questionNum + 1
 
 function startScreen(){
  let startingVar=`
@@ -28,7 +28,7 @@ function renderStart(){
 function question (){
   return`
   <section class = "answerSection"><h1>${STORE.pages[STORE.questionNum].question}</h1>
-  <h5>Question ${questionCount} of 5</h4>
+  <h5>Question ${STORE.questionNumDisplay} of 5</h4>
   <form class = "answerForm">
   <input type="radio" id="buttonOption" name = "radbut" value = "${STORE.pages[STORE.questionNum].choices[0]}" required/>${STORE.pages[STORE.questionNum].choices[0]}<br>
   <input type="radio" id="buttonOption" name = "radbut" value = "${STORE.pages[STORE.questionNum].choices[1]}" required/>${STORE.pages[STORE.questionNum].choices[1]}<br>
@@ -37,7 +37,7 @@ function question (){
   
   </form>
 <h3 class = "scoreClass">Score ${STORE.score} of ${STORE.questionNum} possible</h3>
-  <h4 class = "questionCountClass">Question ${questionCount}/5</h4>
+  <h4 class = "questionCountClass">Question ${STORE.questionNumDisplay}/5</h4>
   <button type = "submit" class = "submitAnswer">Submit Answer</button>
   </section>`;
   
@@ -75,7 +75,7 @@ function handleQuestionSubmit(){
 function increaseNumber(){
   
   if (STORE.questionNum < 4){
-    questionCount++;
+   STORE.questionNumDisplay++;
   STORE.questionNum++;
   }
   else{
@@ -99,7 +99,7 @@ function handleRestart(){
     $(this).remove();
     STORE.questionNum = 0;
     STORE.score = 0;
-    questionCount = 1;
+    STORE.questionNumDisplay = 1;
     renderQuestion();
   });} 
 
