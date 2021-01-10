@@ -10,7 +10,7 @@ const STORE = {
   questionNum:0, 
   score: 0}
 
-console.log("Curren questionNum value is "+STORE.questionNum);
+console.log("Current questionNum value is "+STORE.questionNum);
 
 var questionCount = STORE.questionNum + 1
 var iQuestion = 0;
@@ -19,49 +19,53 @@ function startScreen(){
    
   console.log("start function running");
  let startingVar=`
-  <div class = "startingDiv" id = "startingDiv">
+  <section class = "startingSection" id = "startingSection">
   <h1> Portland Quiz </h1>
   <p> To begin Quiz, click start </p>
   <button type="submit" id = "startButton" class = "startingButton" >Start!</button>
-  </div>
+  </section>
   `;
   return startingVar;
   }
-function displayStart(){
+function renderStart(){
    $('.central').append(startScreen);
 }
 
 function question (){
   
   console.log('question activated');
-  console.log('answers displaying');
+  console.log('answers rendering');
 
-  
   return`
-  <div class = "answerDiv"><h1>${STORE.pages[STORE.questionNum].question}</h1>
-  <h4>Question number ${questionCount}</h4>
-  <input type="radio" id="buttonOption" name = "radbut" value = "${STORE.pages[STORE.questionNum].choices[0]}">${STORE.pages[STORE.questionNum].choices[0]}<br>
-  <input type="radio" id="buttonOption" name = "radbut" value = "${STORE.pages[STORE.questionNum].choices[1]}">${STORE.pages[STORE.questionNum].choices[1]}<br>
-  <input type="radio" id="buttonOption" name = "radbut" value = "${STORE.pages[STORE.questionNum].choices[2]}">${STORE.pages[STORE.questionNum].choices[2]}<br>
-  <input type="radio" id="buttonOption" name = "radbut" value = "${STORE.pages[STORE.questionNum].choices[3]}">${STORE.pages[STORE.questionNum].choices[3]}<br>
-<h3 class = "scoreClass">Score ${STORE.score}</h3>
+  <section class = "answerSection"><h1>${STORE.pages[STORE.questionNum].question}</h1>
+  <h5>Question ${questionCount} of 5</h4>
+  <form class = "answerForm">
+  <input type="radio" id="buttonOption" name = "radbut" value = "${STORE.pages[STORE.questionNum].choices[0]}" required/>${STORE.pages[STORE.questionNum].choices[0]}<br>
+  <input type="radio" id="buttonOption" name = "radbut" value = "${STORE.pages[STORE.questionNum].choices[1]}" required/>${STORE.pages[STORE.questionNum].choices[1]}<br>
+  <input type="radio" id="buttonOption" name = "radbut" value = "${STORE.pages[STORE.questionNum].choices[2]}" required/>${STORE.pages[STORE.questionNum].choices[2]}<br>
+  <input type="radio" id="buttonOption" name = "radbut" value = "${STORE.pages[STORE.questionNum].choices[3]}" required/>${STORE.pages[STORE.questionNum].choices[3]}<br>
+  
+  </form>
+<h3 class = "scoreClass">Score ${STORE.score} of ${STORE.questionNum} possible</h3>
   <h4 class = "questionCountClass">Question ${questionCount}/5</h4>
 
   <button type = "submit" class = "submitAnswer">Submit Answer</button>
-  </div>`;
+  </section>`;
   
 }
-function displayQuestion(){
-  console.log('displayQuestion Function Running');
-
+function renderQuestion(){
+  console.log('renderQuestion Function Running');
+   
   $('.central').html(question);
+  
 }
 
 
 function handleBeginQuizSubmit(){
-  $('.startingDiv').on('click', '.startingButton', function(event) {
+  $('.startingSection').on('click', '.startingButton', function(event) {
     console.log('start button clicked');
-    displayQuestion();
+    renderQuestion();
+
     $(handleQuestionSubmit)
     $(this).remove();
   });
@@ -70,14 +74,21 @@ function handleBeginQuizSubmit(){
 
 function handleQuestionSubmit(){
   console.log("handleQuestionSubmit running");
-  $('.answerDiv').on('click', '.submitAnswer', function(event) {
-    console.log("submit answer clicked");
+
+  $('.answerSection').on('click', '.submitAnswer', 
+   
+  function(event) {
+  console.log("submit answer clicked");
   console.log('Array Question Number is ' + STORE.questionNum);
+    if (!$("input[name='radbut']:checked").val()) {
+    return alert("You miss 100% of the shots you don't take, try to answer the question");
+  }
+ else{
   checkAnswer();
-    increaseNumber();
-    displayQuestion();
-    $(handleQuestionSubmit)
-    $(this).remove();
+  increaseNumber();
+  renderQuestion();
+  $(handleQuestionSubmit)
+  $(this).remove();}
 
   })};
 
@@ -88,17 +99,17 @@ function increaseNumber(){
   STORE.questionNum++;
   console.log('questioNum '+STORE.questionNum);}
   else{
-    $(finalScoreDisplay)
+    $(finalScoreRender)
   }
 }
 
 function finalScore(){
   return `
-  <div class = "restartingDiv">
+  <section class = "restartingSection">
   <h1> You finished </h1>
-  <h3> Your score is ${STORE.score}</h3>
+  <h3> Your score is ${STORE.score} out of 5 possible points</h3>
    <button type="submit" id = "restartButton" class = "restartingButton" >Restart Quiz!</button>
-   </div>
+   </section>
   `
    
 }
@@ -106,34 +117,37 @@ function finalScore(){
 
 
 function handleRestart(){
-  $('.restartingDiv').on('click', '.restartingButton', function(event) {
+  $('.restartingSection').on('click', '.restartingButton', function(event) {
     console.log('restart button clicked');
     $(handleQuestionSubmit)
     $(this).remove();
     STORE.questionNum = 0;
     STORE.score = 0;
     questionCount = 1;
-    displayQuestion();
+    renderQuestion();
   });} 
 
-  function finalScoreDisplay(){
+  function finalScoreRender(){
    $('.central').html(finalScore);
    handleRestart();
 }
 
 function checkAnswer(){
   var answerToCheck = $('input[name="radbut"]:checked').val();
+
   console.log('checking answer ' + answerToCheck);
-  
-  if (answerToCheck === STORE.pages[STORE.questionNum].answer){
+
+ if (answerToCheck === STORE.pages[STORE.questionNum].answer){
   console.log("CORRECT");
-  alert('CORRECT!');
+  alert('You got it! Great Job!');
   STORE.score++;}
   else{console.log("INCORRECT");
-    alert("WRONG! The correct answer is "+ STORE.pages[STORE.questionNum].answer);
+    alert("Failure has consequences, the correct answer is "+ STORE.pages[STORE.questionNum].answer);
 }}
 
-$(displayStart)
+
+
+$(renderStart)
 $(handleBeginQuizSubmit)
 
 

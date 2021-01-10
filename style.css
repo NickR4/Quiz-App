@@ -2,24 +2,16 @@
   color:black;
 }
 
-.welcome {
-  margin: 20px;
-  padding: 26px;
-  border: 2px solid darkgoldenrod;
-  display: flex;
-  flex-direction: column;
-}
-
 .startingButton{
   color: black;
 }
-.startingDiv{
+.startingSection{
   color: black;
 }
 .submitAnswer {
 color:black;
 }
-.answerDiv {
+.answerSection {
   color:black;
 }
 
@@ -30,12 +22,37 @@ color:black;
 .central{
   color:black;
   padding:20px;
+  background-color: #00E66C;
 }
 
 .scoreClass {
   text-decoration: underline;
+  color:greenyellow;
 }
 
 .questionCountClass{
-  color:grey;
+  color:white;
+}
+
+h5 {
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size:25px;
+}
+
+.answerForm{
+  color:black;
+  border-width: 5px;
+  border-color:blue;
+  
+}
+p {
+  font-size:30px;
+}
+
+form {
+  font-size:30px;
+}
+
+h1{
+  font-size:35px;
 }
