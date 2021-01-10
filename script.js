@@ -10,14 +10,9 @@ const STORE = {
   questionNum:0, 
   score: 0}
 
-console.log("Current questionNum value is "+STORE.questionNum);
-
 var questionCount = STORE.questionNum + 1
 
-
 function startScreen(){
-   
-  console.log("start function running");
  let startingVar=`
   <section class = "startingSection" id = "startingSection">
   <h1> Portland Quiz </h1>
@@ -27,15 +22,12 @@ function startScreen(){
   `;
   return startingVar;
   }
+
 function renderStart(){
    $('.central').append(startScreen);
 }
 
 function question (){
-  
-  console.log('question activated');
-  console.log('answers rendering');
-
   return`
   <section class = "answerSection"><h1>${STORE.pages[STORE.questionNum].question}</h1>
   <h5>Question ${questionCount} of 5</h4>
@@ -54,27 +46,20 @@ function question (){
   
 }
 function renderQuestion(){
-  console.log('renderQuestion Function Running');
-   
   $('.central').html(question);
-  
 }
 
 
 function handleBeginQuizSubmit(){
   $('.startingSection').on('click', '.startingButton', function(event) {
-    console.log('start button clicked');
     renderQuestion();
-
     $(handleQuestionSubmit)
     $(this).remove();
   });
-  
 }
 
 function handleQuestionSubmit(){
   console.log("handleQuestionSubmit running");
-
   $('.answerSection').on('click', '.submitAnswer', 
    
   function(event) {
@@ -89,15 +74,12 @@ function handleQuestionSubmit(){
   renderQuestion();
   $(handleQuestionSubmit)
   $(this).remove();}
-
   })};
 
 function increaseNumber(){
-  console.log('IncreaseNumber Function Activated');
   if (STORE.questionNum < 4){
     questionCount++;
   STORE.questionNum++;
-  console.log('questioNum '+STORE.questionNum);}
   else{
     $(finalScoreRender)
   }
@@ -109,16 +91,11 @@ function finalScore(){
   <h1> You finished </h1>
   <h3> Your score is ${STORE.score} out of 5 possible points</h3>
    <button type="submit" id = "restartButton" class = "restartingButton" >Restart Quiz!</button>
-   </section>
-  `
-   
+   </section>` 
 }
-
-
 
 function handleRestart(){
   $('.restartingSection').on('click', '.restartingButton', function(event) {
-    console.log('restart button clicked');
     $(handleQuestionSubmit)
     $(this).remove();
     STORE.questionNum = 0;
@@ -134,18 +111,12 @@ function handleRestart(){
 
 function checkAnswer(){
   var answerToCheck = $('input[name="radbut"]:checked').val();
-
-  console.log('checking answer ' + answerToCheck);
-
  if (answerToCheck === STORE.pages[STORE.questionNum].answer){
-  console.log("CORRECT");
   alert('You got it! Great Job!');
   STORE.score++;}
-  else{console.log("INCORRECT");
+  else{
     alert("Failure has consequences, the correct answer is "+ STORE.pages[STORE.questionNum].answer);
 }}
-
-
 
 $(renderStart)
 $(handleBeginQuizSubmit)
